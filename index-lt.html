@@ -1,66 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="lt" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petrasmo Studios - Mobile App Development</title>
-    <!-- Tailwind CSS library for modern design -->
+    <title>Petrasmo Studios - Mobiliųjų programėlių kūrimas</title>
+    <!-- Tailwind CSS biblioteka moderniam dizainui -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0b0f19] text-gray-300 font-sans antialiased">
 
-    <!-- Navigation Bar (Header) -->
+    <!-- Navigacijos juosta (Header) -->
     <nav class="bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
                 Petrasmo Studios
             </span>
             <div class="flex items-center space-x-6">
-                <a href="#apps" class="hover:text-indigo-400 transition text-sm font-medium">Apps</a>
-                <a href="#services" class="hover:text-indigo-400 transition text-sm font-medium">Services</a>
-                <a href="#contact" class="hover:text-indigo-400 transition text-sm font-medium">Contact</a>
-                <!-- Language Switcher -->
+                <a href="#apps" class="hover:text-indigo-400 transition text-sm font-medium">Programėlės</a>
+                <a href="#services" class="hover:text-indigo-400 transition text-sm font-medium">Paslaugos</a>
+                <a href="#contact" class="hover:text-indigo-400 transition text-sm font-medium">Kontaktai</a>
+                <!-- Kalbos perjungiklis -->
                 <div class="border-l border-slate-700 pl-4 flex space-x-2 text-xs font-semibold">
-                    <span class="text-indigo-400">EN</span>
+                    <a href="/index.html" class="text-gray-500 hover:text-white transition">EN</a>
                     <span class="text-slate-600">|</span>
-                    <a href="/index-lt.html" class="text-gray-500 hover:text-white transition">LT</a>
+                    <span class="text-indigo-400">LT</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section (Left photo, right text) -->
+    <!-- Pristatymo sekcija su nuotrauka kairėje (Hero) -->
     <header class="max-w-6xl mx-auto px-4 py-16 md:py-24">
         <div class="grid md:grid-cols-12 gap-12 items-center">
             
-            <!-- LEFT COLUMN: Profile picture & subtitle -->
+            <!-- KAIRĖ PUSĖ: Nuotrauka ir asmeninis prisistatymas -->
             <div class="md:col-span-5 text-center md:text-left flex flex-col items-center md:items-start">
                 <div class="relative group">
+                    <!-- Apvalus švytėjimo efektas po nuotrauka -->
                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+                    <!-- Nuotrauka dabar yra visiškai apvali (rounded-full) ir kvadratinė (aspect-square) -->
                     <img src="photo.jpg" alt="Petras Mo." class="relative w-56 h-56 md:w-64 md:h-64 object-cover rounded-full border border-slate-700 bg-slate-800 shadow-2xl aspect-square">
                 </div>
                 <h2 class="text-xl font-bold mt-6 text-white">Petras Mo.</h2>
-                <p class="text-indigo-400 text-sm font-medium">Mobile Android App & Systems Development & Maintenance</p>
-                <p class="text-gray-405 text-xs mt-2 text-slate-500">Vilnius, Lithuania</p>
+                <p class="text-indigo-400 text-sm font-medium">Mobiliųjų „Android“ programėlių ir sistemų kūrimas bei priežiūra</p>
+                <p class="text-gray-405 text-xs mt-2 text-slate-500">Vilnius, Lietuva</p>
             </div>
 
-            <!-- RIGHT COLUMN: Pitch & CTA -->
+            <!-- DEŠINĖ PUSĖ: Studijos pristatymas ir pasiūlymas -->
             <div class="md:col-span-7 space-y-6 text-center md:text-left">
                 <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs px-3 py-1.5 rounded-full font-semibold uppercase tracking-wider">
-                    Professional Development
+                    Profesionalus programavimas
                 </span>
                 <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                    High-Quality Android App Development & Long-Term Maintenance
+                    Kokybiškų „Android“ programėlių kūrimas ir ilgalaikis palaikymas
                 </h1>
                 <p class="text-gray-450 text-base md:text-lg leading-relaxed text-slate-400">
-                    Professional Android application design, development, and technical support. Our services cover the complete project lifecycle – from initial concept analysis to successful deployment on the Google Play Store. Focus is firmly placed on software stability, performance, and seamless updates according to the latest system standards.
+                    Profesionalus „Android“ programėlių kūrimas, vystymas ir techninis palaikymas. Paslaugos apima pilną projekto gyvavimo ciklą – nuo idėjos analizės iki sėkmingo programos publikavimo „Google Play“ parduotuvėje. Didžiausias dėmesys skiriamas programinės įrangos stabilumui, greitaveikai ir sklandžiam atnaujinimui pagal naujausius sistemos reikalavimus.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-4">
                     <a href="#contact" class="bg-indigo-600 text-white text-center px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-indigo-500 hover:shadow-indigo-500/20 transition duration-300">
-                        Order Services
+                        Užsakyti paslaugas
                     </a>
                     <a href="#apps" class="border border-slate-700 text-slate-300 text-center px-8 py-3 rounded-lg font-semibold hover:bg-slate-800/50 hover:text-white transition duration-300">
-                        Created Projects
+                        Sukurti projektai
                     </a>
                 </div>
             </div>
@@ -68,166 +70,166 @@
         </div>
     </header>
 
-    <!-- Apps Section -->
+    <!-- Programėlių sekcija -->
     <section id="apps" class="bg-[#080c14] border-y border-slate-900 py-20 px-4">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4 text-white">Apps</h2>
+            <h2 class="text-3xl font-bold text-center mb-4 text-white">Programėlės</h2>
             <p class="text-slate-400 text-center mb-16 max-w-xl mx-auto text-sm">
-                Below are our publicly launched applications, demonstrating our technical expertise and commitment to quality.
+                Žemiau pateikiamos viešai publikuojamos programėlės, demonstruojančios techninę patirtį ir kokybės standartus.
             </p>
             
             <div class="grid md:grid-cols-2 gap-8">
                 
-                <!-- 1. APP: Work Journal (Flagship) -->
+                <!-- 1. PROGRAMĖLĖ: Darbo žurnalas (Flagmanas) -->
                 <div class="relative group bg-gradient-to-b from-slate-900 to-[#0e1626] rounded-2xl p-8 border border-indigo-500/30 hover:border-indigo-500/50 shadow-xl hover:shadow-indigo-500/5 flex flex-col justify-between transform hover:-translate-y-1 transition duration-500">
-                    <div class="absolute top-0 right-0 bg-slate-800/60 text-slate-400 border-l border-b border-slate-800 text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-tr-2xl rounded-bl-xl text-slate-400">
-                        Popular ★
+                    <div class="absolute top-0 right-0 bg-slate-800/60 text-slate-400 border-l border-b border-slate-800 text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-tr-2xl rounded-bl-xl">
+                        Populiariausia ★
                     </div>
                     
                     <div>
                         <div class="flex items-center gap-4 mb-6">
-                            <img src="logo-wj.png" alt="Work Journal" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
+                            <img src="logo-wj.png" alt="Darbo žurnalas" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
-                                <h3 class="text-2xl font-bold text-white tracking-tight">Work Journal</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Employee attendance and discipline control</p>
+                                <h3 class="text-2xl font-bold text-white tracking-tight">Darbo žurnalas</h3>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Darbuotojų laiko ir drausmės kontrolė</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            A systematic tool designed for precise tracking of employee check-in and check-out times. The app allows managers to easily monitor shift starts and ends, log delays, and maintain overall work discipline. Perfect for businesses looking to simplify time tracking and ensure employees start and finish work on time.
+                            Sistemingas įrankis, skirtas tiksliam darbuotojų atvykimo ir išvykimo laiko fiksavimui. Programėlė leidžia vadovams patogiai kontroliuoti pamainų pradžią bei pabaigą, registruoti vėlavimus bei stebėti bendrą darbo drausmę. Puikiai tinka įmonėms, siekiančioms supaprastinti laiko apskaitą ir užtikrinti, kad darbuotojai laiku pradėtų bei baigtų darbus.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.darbis" target="_blank" class="bg-indigo-600 text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-500 shadow-lg shadow-indigo-600/10 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="#" class="border border-slate-700 text-slate-400 hover:text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-slate-800/40 transition duration-300">
-                            Read More
+                            Plačiau apie programą
                         </a>
                     </div>
                 </div>
 
-                <!-- 2. APP: Masterhood -->
+                <!-- 2. PROGRAMĖLĖ: Masterhood -->
                 <div class="bg-gradient-to-b from-slate-900 to-[#0c1322] rounded-2xl p-8 border border-slate-800 shadow-md flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <img src="logo-masterhood.png" alt="Masterhood" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
                                 <h3 class="text-2xl font-bold text-white tracking-tight">Masterhood</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Local craftsman search and neighborhood services</p>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Vietinių meistrų paieška ir paslaugos kaimynystėje</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            A convenient tool helping users quickly find reliable craftsmen and service providers in their neighborhood. Users can quickly submit a task by specifying the service category and radius, while registered specialists (plumbers, electricians, decorators) receive an instant notification on their phone and connect directly.
+                            Patogus įrankis, padedantis greitai rasti reikiamus meistrus ir paslaugų teikėjus savo kaimynystėje. Vartotojai gali skubiai pateikti užklausą nurodydami paslaugų kategoriją bei spindulį, o sistemoje registruoti atitinkamos srities specialistai (santechnikai, elektrikai, apdailininkai) akimirksniu gauna pranešimą ir susisiekia tiesiogiai.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.masterhood" target="_blank" class="bg-slate-800 hover:bg-slate-750 text-white text-center px-6 py-2.5 rounded-lg font-medium border border-slate-700 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="#" class="border border-slate-700 text-slate-400 hover:text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-slate-800/40 transition duration-300">
-                            Read More
+                            Plačiau apie programą
                         </a>
                     </div>
                 </div>
 
-                <!-- 3. APP: Neighbor P.M. -->
+                <!-- 3. PROGRAMĖLĖ: Neighbor P.M. -->
                 <div class="bg-gradient-to-b from-slate-900 to-[#0c1322] rounded-2xl p-8 border border-slate-800 shadow-md flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <img src="logo-neighbor.png" alt="Neighbor P.M." class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
                                 <h3 class="text-2xl font-bold text-white tracking-tight">Neighbor P.M.</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Machinery sharing and neighborhood assistance</p>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Žemės ūkio technikos pasidalinimas ir kaimynų pagalba</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            This is a kind of **"Uber for farmers"** – a universal platform for neighborhood assistance and agricultural machinery sharing. The app allows users to lease and share implements or tractors, as well as quickly find seasonal workers. In case of an emergency (SOS), the system ensures instant neighbor notification within a specified radius, allowing the community to react swiftly and provide aid.
+                            Tai savotiškas **„Uberis ūkininkams“** – universali kaimynystės pagalbos bei žemės ūkio technikos dalijimosi platforma. Programėlė leidžia ne tik nuomotis bei dalintis padargais ar traktoriais, bet ir greitai rasti pagalbininkų sezono darbams atlikti. Nelaimės ar skubios pagalbos atveju (SOS), sistema leidžia akimirksniu informuoti kaimynus nustatytu spinduliu, kad bendruomenė galėtų staigiai sureaguoti ir suteikti reikiamą paramą.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.neighborpm" target="_blank" class="bg-slate-800 hover:bg-slate-750 text-white text-center px-6 py-2.5 rounded-lg font-medium border border-slate-700 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="#" class="border border-slate-700 text-slate-400 hover:text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-slate-800/40 transition duration-300">
-                            Read More
+                            Plačiau apie programą
                         </a>
                     </div>
                 </div>
 
-                <!-- 4. APP: Coffefy -->
+                <!-- 4. PROGRAMĖLĖ: Coffefy -->
                 <div class="bg-gradient-to-b from-slate-900 to-[#0c1322] rounded-2xl p-8 border border-slate-800 shadow-md flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <img src="logo-cofefy.png" alt="Coffefy" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
                                 <h3 class="text-2xl font-bold text-white tracking-tight">Coffefy</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">New connections and cozy chats over coffee</p>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Naujos pažintys ir pokalbiai prie kavos</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            A **mini "Tinder"** designed to discover new friends and like-minded people for a cozy cup of coffee. Using an intuitive radar, users can view profiles of nearby people and invite them to meet. When mutual interest occurs (Match), the app allows calling your new friend directly through the system, keeping your personal phone number completely private.
+                            Tai **mini „Tinderis“**, skirtas atrasti naujų draugų ir bendraminčius jaukiam pokalbiui prie kavos puodelio. Naudodamiesi intuityviu radaru, vartotojai gali peržiūrėti netoliese esančių žmonių anketas, kviesti juos susitikti, o įvykus abipusiam susidomėjimui (Match) – saugiai skambinti vienas kitam tiesiai per programėlę, visiškai neatskleidžiant asmeninio telefono numerio.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.coffefy" target="_blank" class="bg-slate-800 hover:bg-slate-750 text-white text-center px-6 py-2.5 rounded-lg font-medium border border-slate-700 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="#" class="border border-slate-700 text-slate-400 hover:text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-slate-800/40 transition duration-300">
-                            Read More
+                            Plačiau apie programą
                         </a>
                     </div>
                 </div>
 
-                <!-- 5. APP: Huntertest -->
+                <!-- 5. PROGRAMĖLĖ: Huntertest -->
                 <div class="bg-gradient-to-b from-slate-900 to-[#0c1322] rounded-2xl p-8 border border-slate-800 shadow-md flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <img src="logo-huntertest.png" alt="Huntertest" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
                                 <h3 class="text-2xl font-bold text-white tracking-tight">Huntertest</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Preparation for the theoretical hunting exam</p>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Pasiruošimas teoriniam medžiotojų egzaminui</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            An educational platform designed for future hunters preparing for the theoretical state exam. The app features up-to-date quiz questions based on current legislation, safety rules, and biology basics. It allows users to track their learning progress, solve mock exams, and effectively prepare for the official test.
+                            Specializuota mokomoji platforma, skirta būsimiems medžiotojams ruoštis teoriniam egzaminui. Programėlėje pateikiami aktualūs testų klausimai pagal galiojančius teisės aktus, saugaus elgesio taisykles ir biologijos pagrindus. Įrankis leidžia stebėti pažangą, spręsti bandomuosius egzaminus bei efektyviai pasiruošti valstybiniam atsiskaitymui.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.huntertest" target="_blank" class="bg-slate-800 hover:bg-slate-750 text-white text-center px-6 py-2.5 rounded-lg font-medium border border-slate-700 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="#" class="border border-slate-700 text-slate-400 hover:text-white text-center px-6 py-2.5 rounded-lg font-medium hover:bg-slate-800/40 transition duration-300">
-                            Read More
+                            Plačiau apie programą
                         </a>
                     </div>
                 </div>
 
-                <!-- 6. APP: QR & Barcode Scanner -->
+                <!-- 6. PROGRAMĖLĖ: QR ir BAR kodo skaitytuvas -->
                 <div class="bg-gradient-to-b from-slate-900 to-[#0c1322] rounded-2xl p-8 border border-slate-800 shadow-md flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
-                            <img src="logo-qrbar.png" alt="QR & Barcode Scanner" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
+                            <img src="logo-qrbar.png" alt="QR ir BAR skaitytuvas" class="w-16 h-16 object-cover rounded-2xl shadow-lg border border-slate-800">
                             <div>
-                                <h3 class="text-2xl font-bold text-white tracking-tight">QR & Barcode Scanner</h3>
-                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Rapid determination of product origin</p>
+                                <h3 class="text-2xl font-bold text-white tracking-tight">QR ir BAR skaitytuvas</h3>
+                                <p class="text-[11px] text-indigo-400/80 font-bold tracking-wider uppercase">Greitas prekių kilmės nustatymas</p>
                             </div>
                         </div>
                         <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify indent-8">
-                            An everyday tool designed to instantly determine a product's country of origin. The app detects if a product is Lithuanian, displays food ingredients, sugar content, and allergens. It also fully supports scanning QR codes and opening web links quickly and securely.
+                            Kasdienis įrankis, skirtas akimirksniu nustatyti prekių kilmės šalį. Programėlė atpažįsta, ar prekė lietuviška, pateikia maisto produktų ingredientus, cukraus kiekį bei alergenus. Taip pat pilnai palaiko QR kodų nuskaitymą ir greitą saugų nuorodų atidarymą.
                         </p>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
                         <a href="https://play.google.com/store/apps/details?id=com.petrasmo.madeinpm"  target="_blank" class="bg-slate-800 hover:bg-slate-750 text-white text-center px-6 py-2.5 rounded-lg font-medium border border-slate-700 transition duration-300">
-                            Get it on Google Play
+                            Gauti iš Google Play
                         </a>
                         <a href="/privacy/madeinpm.html" class="border border-slate-800 text-slate-500 hover:text-slate-300 text-center px-6 py-2.5 rounded-lg font-medium transition duration-300">
-                            Privacy Policy
+                            Privatumo politika
                         </a>
                     </div>
                 </div>
@@ -236,126 +238,127 @@
         </div>
     </section>
 
-    <!-- Services and Pricing Section -->
+    <!-- Paslaugų ir kainų sekcija (Pardavimai) -->
     <section id="services" class="max-w-6xl mx-auto px-4 py-20">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white">Services and Pricing</h2>
+        <h2 class="text-3xl font-bold text-center mb-4 text-white">Paslaugos ir kainos</h2>
         <p class="text-slate-400 text-center mb-16 max-w-xl mx-auto text-sm">
-            We offer transparent app development services with no hidden fees. Each project is evaluated individually.
+            Siūlome skaidrias programavimo paslaugas be jokių paslėptų mokesčių. Kiekvienas projektas vertinamas individualiai.
         </p>
 
         <div class="grid md:grid-cols-3 gap-8">
             
-            <!-- Service 1: Custom App -->
+            <!-- 1 Paslauga: Individuali programėlė -->
             <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
                 <div>
-                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">For Individual Needs</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Custom Android App</h3>
+                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">Individualiems poreikiams</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Asmeninė programėlė</h3>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-sm text-slate-500">From</span>
-                        <span class="text-3xl font-extrabold text-white">€600</span>
+                        <span class="text-sm text-slate-500">Nuo</span>
+                        <span class="text-3xl font-extrabold text-white">600 €</span>
                     </div>
                     <ul class="space-y-3 text-slate-400 text-sm mb-8">
                         <li class="flex items-center gap-2">✓ Kotlin / Android SDK</li>
-                        <li class="flex items-center gap-2">✓ Clean, modern design</li>
-                        <li class="flex items-center gap-2">✓ Local Database (Room)</li>
-                        <li class="flex items-center gap-2">✓ Prepared for Google Play launch</li>
+                        <li class="flex items-center gap-2">✓ Paprastas, švarus dizainas</li>
+                        <li class="flex items-center gap-2">✓ Vietinė duomenų bazė (Room)</li>
+                        <li class="flex items-center gap-2">✓ Paruošimas kėlimui į Google Play</li>
                     </ul>
                 </div>
                 <a href="#contact" class="border border-slate-700 hover:border-indigo-500 hover:bg-indigo-600/10 text-white text-center py-2.5 rounded-lg font-medium transition duration-300">
-                    Order Now
+                    Užsakyti
                 </a>
             </div>
 
-            <!-- Service 2: Business Systems -->
+            <!-- 2 Paslauga: Verslo sprendimai -->
             <div class="bg-slate-900/80 rounded-2xl p-6 border border-indigo-500/20 shadow-lg flex flex-col justify-between relative">
                 <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    Recommended
+                    Rekomenduojama
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">For Businesses & Startups</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Business Systems</h3>
+                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">Įmonėms & Startupams</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Verslo sistemos</h3>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-sm text-slate-500">From</span>
-                        <span class="text-3xl font-extrabold text-white">€1200</span>
+                        <span class="text-sm text-slate-500">Nuo</span>
+                        <span class="text-3xl font-extrabold text-white">1200 €</span>
                     </div>
                     <ul class="space-y-3 text-slate-400 text-sm mb-8">
-                        <li class="flex items-center gap-2">✓ Cloud databases (Firebase/SQL)</li>
-                        <li class="flex items-center gap-2">✓ User Authentication (Login)</li>
-                        <li class="flex items-center gap-2">✓ Push Notifications</li>
-                        <li class="flex items-center gap-2">✓ Third-party API integration</li>
+                        <li class="flex items-center gap-2">✓ Debesų duomenų bazės (Firebase/SQL)</li>
+                        <li class="flex items-center gap-2">✓ Vartotojų autorizacija (Login)</li>
+                        <li class="flex items-center gap-2">✓ Pranešimai (Push Notifications)</li>
+                        <li class="flex items-center gap-2">✓ Trečiųjų šalių API integracija</li>
                     </ul>
                 </div>
                 <a href="#contact" class="bg-indigo-600 hover:bg-indigo-500 text-white text-center py-2.5 rounded-lg font-medium transition duration-300">
-                    Order Now
+                    Užsakyti
                 </a>
             </div>
 
-            <!-- Service 3: Integrations and Maintenance -->
+            <!-- 3 Paslauga: Integracijos ir priežiūra -->
             <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
                 <div>
-                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">Consulting & Code</span>
-                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Integrations & Optimization</h3>
+                    <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">Konsultacijos & kodas</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-4">Integracijos & Optimizacija</h3>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-sm text-slate-500">Hourly Rate</span>
-                        <span class="text-3xl font-extrabold text-white">€50 / hr</span>
+                        <span class="text-sm text-slate-500">Valandinis įkainis</span>
+                        <span class="text-3xl font-extrabold text-white">50 € / val.</span>
                     </div>
                     <ul class="space-y-3 text-slate-400 text-sm mb-8">
-                        <li class="flex items-center gap-2">✓ Scanner (QR/BAR) integrations</li>
-                        <li class="flex items-center gap-2">✓ Migration to latest Android SDK</li>
-                        <li class="flex items-center gap-2">✓ AdMob & Firebase setup</li>
-                        <li class="flex items-center gap-2">✓ Code maintenance and bug fixing</li>
+                        <li class="flex items-center gap-2">✓ Kodų skaitytuvų (QR/BAR) integracijos</li>
+                        <li class="flex items-center gap-2">✓ Atnaujinimas iki naujausio Android SDK</li>
+                        <li class="flex items-center gap-2">✓ AdMob & Firebase analitikos pajungimas</li>
+                        <li class="flex items-center gap-2">✓ Klaidų (bugs) taisymas esamuose projektuose</li>
                     </ul>
                 </div>
                 <a href="#contact" class="border border-slate-700 hover:border-indigo-500 hover:bg-indigo-600/10 text-white text-center py-2.5 rounded-lg font-medium transition duration-300">
-                    Consult Now
+                    Konsultuotis
                 </a>
             </div>
 
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Kontaktu sekcija (Susisiekite) -->
+    <!-- Kontaktu sekcija (Susisiekite) -->
     <section id="contact" class="bg-[#080c14] border-t border-slate-900 py-20 px-4">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4 text-white">Let's start a project together</h2>
+            <h2 class="text-3xl font-bold mb-4 text-white">Pradėkime projektą kartu</h2>
             <p class="text-slate-400 mb-10 text-sm">
-                Briefly describe your idea or requested app. I will reply with preliminary timelines and suggestions.
+                Parašykite man trumpą idėjos aprašymą. Atsakysiu su preliminariais terminais bei pasiūlymais.
             </p>
             
-            <!-- Contact form with Formspree -->
+            <!-- Kontaktų forma su jūsų unikaliu Formspree adresu -->
             <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800 shadow-xl max-w-lg mx-auto">
                 <form action="https://formspree.io/f/mkodaqjq" method="POST" class="space-y-6 text-left">
                     
-                    <!-- Email field -->
+                    <!-- Vartotojo el. pašto laukas -->
                     <div>
-                        <label for="email" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Your Email Address</label>
-                        <input type="email" name="email" id="email" required placeholder="name@email.com" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
+                        <label for="email" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Jūsų el. pašto adresas</label>
+                        <input type="email" name="email" id="email" required placeholder="vardas@epastas.lt" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
                     </div>
 
-                    <!-- Message field -->
+                    <!-- Žinutės laukas -->
                     <div>
-                        <label for="message" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Your Message</label>
-                        <textarea name="message" id="message" rows="4" required placeholder="Describe your project, desired features, or timeline..." class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"></textarea>
+                        <label for="message" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Mano žinutė</label>
+                        <textarea name="message" id="message" rows="4" required placeholder="Aprašykite savo idėją, norimą programėlę ar paslaugą..." class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"></textarea>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Mygtukas -->
                     <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md shadow-indigo-600/10 transition duration-300">
-                        Send Message
+                        Siųsti užklausą
                     </button>
                     
-                    <!-- Additional Info -->
+                    <!-- Papildoma info -->
                     <p class="text-[11px] text-center text-slate-500 mt-4 leading-normal">
-                        I usually reply within 24 business hours. Direct contact: petrasmo@gmail.com
+                        Atsakau per 24 darbo valandas. Tiesioginis adresas: petrasmo@gmail.com
                     </p>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Svetainės apačia (Footer) -->
     <footer class="bg-[#05070c] text-slate-600 py-8 px-4 text-center text-xs border-t border-slate-950">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 Petrasmo Studios. All rights reserved.</p>            
+            <p>&copy; 2026 Petrasmo Studios. Visos teisės saugomos.</p>            
         </div>
     </footer>
 
