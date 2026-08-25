@@ -28,7 +28,6 @@
             line-height: 1.5;
         }
 
-        /* Viršutinė juosta */
         .top-nav {
             background: #ffffff;
             border-bottom: 1px solid var(--border);
@@ -73,10 +72,37 @@
             box-sizing: border-box;
         }
 
-        .header { text-align: center; margin-bottom: 28px; }
+        .header { text-align: center; margin-bottom: 24px; }
         .header h1 { font-size: 26px; margin: 0 0 8px 0; color: var(--text-main); }
         .header p { color: var(--text-muted); font-size: 15px; margin: 0; }
         .badge { display: inline-block; background: #eff6ff; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+
+        .method-tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            gap: 4px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 10px 14px;
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .tab-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
 
         .section-label {
             font-size: 13px;
@@ -84,15 +110,15 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--primary);
-            margin: 24px 0 12px 0;
+            margin: 20px 0 12px 0;
             border-bottom: 2px solid #f1f5f9;
             padding-bottom: 6px;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 12px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 12px; }
         .input-group { display: flex; flex-direction: column; }
         .input-group label { font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; }
-        .input-group input, .input-group select { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; outline: none; background: #fff; }
+        .input-group input, .input-group select { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
         .input-group input:focus, .input-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
 
         .btn-calc { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: transform 0.15s; }
@@ -129,7 +155,7 @@
 
         .step-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; font-size: 14px; }
         .step-title { font-weight: 700; color: #1e293b; margin-bottom: 6px; }
-        .formula { background: #ffffff; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 14px; color: #09529b; margin-top: 5px; }
+        .formula { background: #ffffff; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 13px; color: #09529b; margin-top: 5px; line-height: 1.6; }
 
         table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; margin-bottom: 20px; }
         th { background: #f1f5f9; padding: 10px 12px; font-weight: 700; color: #334155; border-bottom: 2px solid var(--border); }
@@ -143,10 +169,10 @@
 
         @media print {
             body { background: #fff; padding: 0; }
-            .top-nav, .btn-calc, .btn-print, .input-group select, .input-group input { display: none !important; }
+            .top-nav, .method-tabs, .btn-calc, .btn-print, .input-group select, .input-group input { display: none !important; }
             .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
             .grid { display: none; }
-            .section-label:nth-of-type(1), .section-label:nth-of-type(2) { display: none; }
+            .section-label { display: none; }
             .results-wrapper { display: block !important; border-top: none; }
         }
     </style>
@@ -164,35 +190,88 @@
     <div class="header">
         <div class="badge">LR Civilinis Kodeksas (CK 3.89 str.)</div>
         <h1>II Pakopos Pensijų Dalijimo Skaičiuoklė</h1>
-        <p>Atskiria asmeninį turtą (iki santuokos ir po skyrybų) bei atskaito grąžinimą į „Sodrą“</p>
+        <p>Pasirinkite patogiausią skaičiavimo metodą</p>
     </div>
 
-    <div class="section-label">1. Pensijų fondo apskaitos vienetai (iš banko išrašo)</div>
-    <div class="grid">
-        <div class="input-group">
-            <label>1. Santuokos pradžioje (2014-12-09)</label>
-            <input type="number" id="u1" value="10000" placeholder="Pvz., 10000" step="0.0001">
+    <!-- Metodo perjungiklis -->
+    <div class="method-tabs no-print">
+        <button class="tab-btn active" id="tabUnits" onclick="setMethod('units')">
+            🎯 1. Apskaitos vienetų metodas (Tiksliausias)
+        </button>
+        <button class="tab-btn" id="tabTime" onclick="setMethod('time')">
+            ⏳ 2. Išgyvento laiko proporcijos metodas (3 Etapai)
+        </button>
+    </div>
+
+    <!-- 1 METODAS: VIENETŲ ĮVESTIS -->
+    <div id="methodUnitsBlock">
+        <div class="section-label">1. Pensijų fondo apskaitos vienetai (iš banko pažymos)</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>1. Santuokos pradžioje (2014-12-09)</label>
+                <input type="number" id="u1" value="10000" placeholder="Pvz., 10000" step="0.0001">
+            </div>
+            <div class="input-group">
+                <label>2. Skyrybų dieną (2024-11-08)</label>
+                <input type="number" id="u2" value="24000" placeholder="Pvz., 24000" step="0.0001">
+            </div>
+            <div class="input-group">
+                <label>3. Šiandien sukaupta iš viso</label>
+                <input type="number" id="u3" value="27000" placeholder="Pvz., 27000" step="0.0001">
+            </div>
         </div>
-        <div class="input-group">
-            <label>2. Skyrybų dieną (2024-11-08)</label>
-            <input type="number" id="u2" value="24000" placeholder="Pvz., 24000" step="0.0001">
-        </div>
-        <div class="input-group">
-            <label>3. Šiandien sukaupta iš viso</label>
-            <input type="number" id="u3" value="27000" placeholder="Pvz., 27000" step="0.0001">
+
+        <div class="section-label">2. Vieneto vertės (€)</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Vieneto kaina skyrybų dieną (€)</label>
+                <input type="number" id="pDivorce" value="2.0000" placeholder="Pvz., 2.0000" step="0.0001">
+            </div>
+            <div class="input-group">
+                <label>Vieneto kaina šiandien (€)</label>
+                <input type="number" id="pToday" value="2.3742" placeholder="Pvz., 2.3742" step="0.0001">
+            </div>
         </div>
     </div>
 
-    <div class="section-label">2. Vieneto vertės ir grąžinimas į „Sodrą“</div>
+    <!-- 2 METODAS: LAIKO PROPORCIJOS ĮVESTIS -->
+    <div id="methodTimeBlock" style="display: none;">
+        <div class="section-label">1. Datos (Formatas: YYYY-MM-DD)</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>1. Kaupimo pradžia (YYYY-MM-DD)</label>
+                <input type="text" id="tStartDate" value="2004-06-15" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="input-group">
+                <label>2. Santuokos pradžia (YYYY-MM-DD)</label>
+                <input type="text" id="tMarriageDate" value="2014-12-09" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="input-group">
+                <label>3. Skyrybų data (YYYY-MM-DD)</label>
+                <input type="text" id="tDivorceDate" value="2024-11-08" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="input-group">
+                <label>4. Šiandien / kaupimo pabaiga</label>
+                <input type="text" id="tTodayDate" value="2026-10-01" placeholder="YYYY-MM-DD">
+            </div>
+        </div>
+
+        <div class="section-label">2. Fondo vertės (€)</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Fondo vertė skyrybų dieną (€)</label>
+                <input type="number" id="valDivorceTime" value="48000" placeholder="Pvz., 48000" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Fondo vertė šiandien (€)</label>
+                <input type="number" id="valTodayTime" value="64103.40" placeholder="Pvz., 64103.40" step="0.01">
+            </div>
+        </div>
+    </div>
+
+    <!-- BENDRI NUSTATYMAI -->
+    <div class="section-label">Grąžinimas į „Sodrą“ ir scenarijus</div>
     <div class="grid">
-        <div class="input-group">
-            <label>Vieneto kaina skyrybų dieną (€)</label>
-            <input type="number" id="pDivorce" value="2.0000" placeholder="Pvz., 2.0000" step="0.0001">
-        </div>
-        <div class="input-group">
-            <label>Vieneto kaina šiandien (€)</label>
-            <input type="number" id="pToday" value="2.3742" placeholder="Pvz., 2.3742" step="0.0001">
-        </div>
         <div class="input-group">
             <label>Grąžinama į „Sodrą“ suma (€)</label>
             <input type="number" id="sodraIncentive" value="10884.49" placeholder="Pvz., 10884.49" step="0.01">
@@ -200,21 +279,22 @@
         <div class="input-group">
             <label>Pasitraukimo scenarijus</label>
             <select id="scenario">
-                <option value="withdraw" selected>Atsiimama grynaisiais / grįžtama į „Sodrą“ (su mokesčių atskaitymu)</option>
-                <option value="keep">Pinigai lieka fonde (išmoka buvusiam sutuoktiniui iš asmeninių lėšų)</option>
+                <option value="withdraw" selected>Atsiimama grynaisiais (2026–2027 m. langas, GPM 0%)</option>
+                <option value="keep">Pinigai lieka fonde (kompensuojama iš asmeninių lėšų)</option>
             </select>
         </div>
     </div>
 
     <button class="btn-calc" onclick="calculate()">Apskaičiuoti išsamų padalijimą</button>
 
+    <!-- REZULTATAI -->
     <div class="results-wrapper" id="results">
         
         <div class="main-cards">
             <div class="card-stat highlight-red">
                 <div class="title">Buvusiai žmonai (50%)</div>
                 <div class="amount" id="cardWife">0.00 €</div>
-                <div class="subtitle">Santuokinio turto dalis</div>
+                <div class="subtitle">Kompensacija (GPM 0%)</div>
             </div>
             <div class="card-stat highlight-purple">
                 <div class="title">Grįžta į „Sodrą“</div>
@@ -252,27 +332,22 @@
         <div class="section-label">Matematinė skaičiavimų eiga (Žingsnis po žingsnio)</div>
         
         <div class="step-box">
-            <div class="step-title">1 ŽINGSNIS: Vienetų paskirstymas pagal 3 etapus</div>
-            <div>• <strong>1 Etapas (Iki santuokos):</strong> <span id="calcStep1Pre"></span></div>
-            <div>• <strong>2 Etapas (Santuokoje nupirkta):</strong> <span id="calcStep1Mar"></span></div>
-            <div>• <strong>3 Etapas (Po skyrybų nupirkta):</strong> <span id="calcStep1Post"></span></div>
+            <div class="step-title">1 ŽINGSNIS: Laikotarpio / vienetų paskirstymas pagal 3 etapus</div>
+            <div id="calcStep1Text"></div>
         </div>
 
         <div class="step-box">
             <div class="step-title">2 ŽINGSNIS: Santuokinio turto vertė skyrybų dieną</div>
-            <div>Santuokos metu įgytus vienetus dauginame iš skyrybų dienos vieneto kainos:</div>
             <div class="formula" id="calcStep2Formula"></div>
         </div>
 
         <div class="step-box">
             <div class="step-title">3 ŽINGSNIS: Žmonai tenkanti kompensacija (50/50 dalijimas)</div>
-            <div>Santuokinį turtą dalijame pusiau:</div>
             <div class="formula" id="calcStep3Formula"></div>
         </div>
 
         <div class="step-box">
-            <div class="step-title">4 ŽINGSNIS: Pinigų paskirstymas atskaičius „Sodros“ dalį</div>
-            <div>Iš bendros fondo sumos atimame „Sodrą“ ir žmonos dalį:</div>
+            <div class="step-title">4 ŽINGSNIS: Pinigų paskirstymas atskaičius „Sodros“ dalį (GPM 0%)</div>
             <div class="formula" id="calcStep4Formula"></div>
         </div>
 
@@ -283,7 +358,7 @@
                     <tr>
                         <th>Etapas</th>
                         <th>Laikotarpis</th>
-                        <th>Vienetai</th>
+                        <th>Kiekis / Trukmė</th>
                         <th>Vertė skyrybų dieną</th>
                         <th>Vertė šiandien</th>
                         <th>Teisinis statusas</th>
@@ -292,31 +367,31 @@
                 <tbody>
                     <tr>
                         <td><strong>1 Etapas</strong></td>
-                        <td>Iki 2014-12-09</td>
-                        <td id="tUnitsPre">0</td>
+                        <td>Iki santuokos</td>
+                        <td id="tUnitsPre">-</td>
                         <td id="tValPreDivorce">0.00 €</td>
                         <td id="tValPreToday" style="font-weight:600; color:#15803d;">0.00 €</td>
                         <td>100% Asmeninė nuosavybė</td>
                     </tr>
                     <tr>
                         <td><strong>2 Etapas</strong></td>
-                        <td>2014-12-09 – 2024-11-08</td>
-                        <td id="tUnitsMar">0</td>
+                        <td>Santuokos metu</td>
+                        <td id="tUnitsMar">-</td>
                         <td id="tValMarDivorce" style="font-weight:600; color:#2563eb;">0.00 €</td>
                         <td id="tValMarToday" style="font-weight:600; color:#2563eb;">0.00 €</td>
                         <td>Bendroji jungtinė (50/50)</td>
                     </tr>
                     <tr>
                         <td><strong>3 Etapas</strong></td>
-                        <td>Nuo 2024-11-08</td>
-                        <td id="tUnitsPost">0</td>
+                        <td>Po skyrybų</td>
+                        <td id="tUnitsPost">-</td>
                         <td>0.00 €</td>
                         <td id="tValPostToday" style="font-weight:600; color:#15803d;">0.00 €</td>
                         <td>100% Asmeninė nuosavybė</td>
                     </tr>
                     <tr style="background:#f8fafc; font-weight:700; border-top: 2px solid var(--border);">
                         <td colspan="2">IŠ VISO FONDE:</td>
-                        <td id="tUnitsTotal">0</td>
+                        <td id="tUnitsTotal">-</td>
                         <td id="tValTotalDivorce">0.00 €</td>
                         <td id="tValTotalToday" style="color:#0f172a; font-size:15px;">0.00 €</td>
                         <td>-</td>
@@ -334,66 +409,146 @@
 </div>
 
 <script>
+let currentMethod = 'units';
+
+function setMethod(method) {
+    currentMethod = method;
+    document.getElementById('tabUnits').classList.toggle('active', method === 'units');
+    document.getElementById('tabTime').classList.toggle('active', method === 'time');
+    document.getElementById('methodUnitsBlock').style.display = method === 'units' ? 'block' : 'none';
+    document.getElementById('methodTimeBlock').style.display = method === 'time' ? 'block' : 'none';
+}
+
+function parseMonths(d1, d2) {
+    return (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
+}
+
 function calculate() {
-    const u1 = parseFloat(document.getElementById('u1').value) || 0;
-    const u2 = parseFloat(document.getElementById('u2').value) || 0;
-    const u3 = parseFloat(document.getElementById('u3').value) || 0;
-    const pDivorce = parseFloat(document.getElementById('pDivorce').value) || 0;
-    const pToday = parseFloat(document.getElementById('pToday').value) || 0;
-    const sodraIncentive = parseFloat(document.getElementById('sodraIncentive').value) || 0;
     const scenario = document.getElementById('scenario').value;
+    const sodraIncentive = parseFloat(document.getElementById('sodraIncentive').value) || 0;
 
-    if (u2 < u1 || u3 < u2) {
-        alert("Klaida: vienetų skaičius bėgant laikui negali mažėti!");
-        return;
+    let valTotalToday = 0;
+    let valTotalDivorce = 0;
+    let valMaritalDivorce = 0;
+    let valPreDivorce = 0;
+    let valPreToday = 0;
+    let valPostToday = 0;
+    let valMaritalToday = 0;
+
+    let unitsPreText = "", unitsMarText = "", unitsPostText = "", unitsTotalText = "";
+    let step1Html = "", step2Formula = "";
+
+    if (currentMethod === 'units') {
+        const u1 = parseFloat(document.getElementById('u1').value) || 0;
+        const u2 = parseFloat(document.getElementById('u2').value) || 0;
+        const u3 = parseFloat(document.getElementById('u3').value) || 0;
+        const pDivorce = parseFloat(document.getElementById('pDivorce').value) || 0;
+        const pToday = parseFloat(document.getElementById('pToday').value) || 0;
+
+        if (u2 < u1 || u3 < u2) {
+            alert("Klaida: vienetų skaičius bėgant laikui negali mažėti!");
+            return;
+        }
+
+        const unitsPre = u1;
+        const unitsMarital = u2 - u1;
+        const unitsPost = u3 - u2;
+        const unitsTotal = u3;
+
+        valTotalDivorce = u2 * pDivorce;
+        valTotalToday = unitsTotal * pToday;
+        valPreDivorce = unitsPre * pDivorce;
+        valMaritalDivorce = unitsMarital * pDivorce;
+        valPreToday = unitsPre * pToday;
+        valMaritalToday = unitsMarital * pToday;
+        valPostToday = unitsPost * pToday;
+
+        unitsPreText = unitsPre.toLocaleString('lt-LT') + ' vnt.';
+        unitsMarText = unitsMarital.toLocaleString('lt-LT') + ' vnt.';
+        unitsPostText = unitsPost.toLocaleString('lt-LT') + ' vnt.';
+        unitsTotalText = unitsTotal.toLocaleString('lt-LT') + ' vnt.';
+
+        step1Html = `• <strong>1 Etapas (Iki santuokos):</strong> ${unitsPre.toLocaleString('lt-LT')} vnt.<br>
+                     • <strong>2 Etapas (Santuokoje nupirkta):</strong> ${u2.toLocaleString('lt-LT')} - ${u1.toLocaleString('lt-LT')} = ${unitsMarital.toLocaleString('lt-LT')} vnt.<br>
+                     • <strong>3 Etapas (Po skyrybų nupirkta):</strong> ${u3.toLocaleString('lt-LT')} - ${u2.toLocaleString('lt-LT')} = ${unitsPost.toLocaleString('lt-LT')} vnt.`;
+        
+        step2Formula = `${unitsMarital.toLocaleString('lt-LT')} vnt. × ${pDivorce.toFixed(4)} € = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+
+    } else {
+        const dStart = new Date(document.getElementById('tStartDate').value);
+        const dMarriage = new Date(document.getElementById('tMarriageDate').value);
+        const dDivorce = new Date(document.getElementById('tDivorceDate').value);
+        const dToday = new Date(document.getElementById('tTodayDate').value);
+        
+        valTotalDivorce = parseFloat(document.getElementById('valDivorceTime').value) || 0;
+        valTotalToday = parseFloat(document.getElementById('valTodayTime').value) || 0;
+
+        const preMonths = parseMonths(dStart, dMarriage);
+        const maritalMonths = parseMonths(dMarriage, dDivorce);
+        const postMonths = parseMonths(dDivorce, dToday);
+        const totalUpToDivorceMonths = preMonths + maritalMonths;
+        const totalAllMonths = preMonths + maritalMonths + postMonths;
+
+        if (preMonths < 0 || maritalMonths <= 0 || postMonths < 0) {
+            alert("Klaida: patikrinkite datas! Jos turi eiti chronologine tvarka (Pradžia -> Santuoka -> Skyrybos -> Šiandien).");
+            return;
+        }
+
+        const maritalRatio = maritalMonths / totalUpToDivorceMonths;
+        const preRatio = preMonths / totalUpToDivorceMonths;
+
+        valMaritalDivorce = valTotalDivorce * maritalRatio;
+        valPreDivorce = valTotalDivorce * preRatio;
+
+        const growthAfterDivorce = valTotalToday - valTotalDivorce;
+        valPreToday = valPreDivorce;
+        valMaritalToday = valMaritalDivorce;
+        valPostToday = growthAfterDivorce > 0 ? growthAfterDivorce : 0;
+
+        unitsPreText = `${preMonths} mėn. (${(preRatio*100).toFixed(1)}%)`;
+        unitsMarText = `${maritalMonths} mėn. (${(maritalRatio*100).toFixed(1)}%)`;
+        unitsPostText = `${postMonths} mėn. (100% Jūsų)`;
+        unitsTotalText = `${totalAllMonths} mėn.`;
+
+        step1Html = `• <strong>1 Etapas (Iki santuokos):</strong> ${preMonths} mėn. (${(preRatio*100).toFixed(2)}% iki skyrybų buvusio laiko).<br>
+                     • <strong>2 Etapas (Santuokoje):</strong> ${maritalMonths} mėn. (${(maritalRatio*100).toFixed(2)}% iki skyrybų buvusio laiko).<br>
+                     • <strong>3 Etapas (Po skyrybų gyvenote vienas):</strong> ${postMonths} mėn. (visas šis laikas ir prieaugis lieka Jums).`;
+        
+        step2Formula = `${valTotalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € × ${(maritalRatio*100).toFixed(2)}% = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
     }
-
-    const unitsPre = u1;
-    const unitsMarital = u2 - u1;
-    const unitsPost = u3 - u2;
-    const unitsTotal = u3;
-
-    const valPreDivorce = unitsPre * pDivorce;
-    const valMaritalDivorce = unitsMarital * pDivorce;
-    const valTotalDivorce = u2 * pDivorce;
-
-    const valPreToday = unitsPre * pToday;
-    const valMaritalToday = unitsMarital * pToday;
-    const valPostToday = unitsPost * pToday;
-    const valTotalToday = unitsTotal * pToday;
 
     let wifeShare = valMaritalDivorce / 2;
     let myRemaining = 0;
     let sodraReturned = 0;
 
-    document.getElementById('calcStep1Pre').innerText = unitsPre.toLocaleString('lt-LT') + ' vnt.';
-    document.getElementById('calcStep1Mar').innerText = `${u2.toLocaleString('lt-LT')} - ${u1.toLocaleString('lt-LT')} = ${unitsMarital.toLocaleString('lt-LT')} vnt.`;
-    document.getElementById('calcStep1Post').innerText = `${u3.toLocaleString('lt-LT')} - ${u2.toLocaleString('lt-LT')} = ${unitsPost.toLocaleString('lt-LT')} vnt.`;
-
-    document.getElementById('calcStep2Formula').innerText = `${unitsMarital.toLocaleString('lt-LT')} vnt. × ${pDivorce.toFixed(4)} € = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+    document.getElementById('calcStep1Text').innerHTML = step1Html;
+    document.getElementById('calcStep2Formula').innerText = step2Formula;
+    document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
     let sodraHtml = "";
     if (scenario === 'withdraw') {
         sodraReturned = sodraIncentive;
-        const gpmRate = 0.15;
-        const wifeShareGross = wifeShare;
-        wifeShare = wifeShare * (1 - gpmRate);
-        myRemaining = valTotalToday - sodraReturned - wifeShareGross;
+        myRemaining = valTotalToday - sodraReturned - wifeShare;
 
-        document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShareGross.toLocaleString('lt-LT', {minimumFractionDigits:2})} € → Atėmus 15% GPM: ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
-        document.getElementById('calcStep4Formula').innerText = `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) - ${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grįžta į „Sodrą“) - ${wifeShareGross.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) = ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+        document.getElementById('calcStep4Formula').innerText = 
+            `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) ` +
+            `- ${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grįžta į „Sodrą“) ` +
+            `- ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) ` +
+            `= ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (Jums lieka grynaisiais į sąskaitą)`;
 
-        sodraHtml = `<strong>Pasitraukimo į „Sodrą“ suvestinė:</strong><br>
+        sodraHtml = `<strong>Pasitraukimo į „Sodrą“ ir išgryninimo suvestinė (GPM 0% lengvata 2026–2027 m.):</strong><br>
         • Į „Sodros“ biudžetą grąžinama suma: <strong>${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong> (už tai atstatomi Jūsų I pakopos pensijos taškai).<br>
         • Buvusiai žmonai išmokama kompensacija: <strong>${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.<br>
-        • <strong>Jums į asmeninę sąskaitą lieka grynaisiais: ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.`;
+        • <strong>Jums į asmeninę sąskaitą lieka grynaisiais: ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong> (lėšos GPM neapmokestinamos).`;
         document.getElementById('cardSodra').innerText = sodraReturned.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     } else {
         sodraReturned = 0;
         myRemaining = valTotalToday - wifeShare;
 
-        document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
-        document.getElementById('calcStep4Formula').innerText = `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) - ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) = ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+        document.getElementById('calcStep4Formula').innerText = 
+            `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) ` +
+            `- ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) ` +
+            `= ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
         sodraHtml = `<strong>Informacija:</strong> Pasirinktas scenarijus, kai pinigai lieka fonde. „Sodrai“ niekas negrąžinama, o žmonai kompensuojama iš asmeninių lėšų.`;
         document.getElementById('cardSodra').innerText = "0.00 €";
@@ -405,22 +560,22 @@ function calculate() {
     document.getElementById('cardMyTotal').innerText = myRemaining.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('totalBarSum').innerText = 'Bendra vertė: ' + valTotalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    document.getElementById('tUnitsPre').innerText = unitsPre.toLocaleString('lt-LT');
+    document.getElementById('tUnitsPre').innerText = unitsPreText;
     document.getElementById('tValPreDivorce').innerText = valPreDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('tValPreToday').innerText = valPreToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    document.getElementById('tUnitsMar').innerText = unitsMarital.toLocaleString('lt-LT');
+    document.getElementById('tUnitsMar').innerText = unitsMarText;
     document.getElementById('tValMarDivorce').innerText = valMaritalDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('tValMarToday').innerText = valMaritalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    document.getElementById('tUnitsPost').innerText = unitsPost.toLocaleString('lt-LT');
+    document.getElementById('tUnitsPost').innerText = unitsPostText;
     document.getElementById('tValPostToday').innerText = valPostToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    document.getElementById('tUnitsTotal').innerText = unitsTotal.toLocaleString('lt-LT');
+    document.getElementById('tUnitsTotal').innerText = unitsTotalText;
     document.getElementById('tValTotalDivorce').innerText = valTotalDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('tValTotalToday').innerText = valTotalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.89 str. 1 d. 7 p., asmeniniu sutuoktinių turtu pripažįstamas turtas, įgytas iki santuokos ir po faktinio jos nutraukimo. Todėl 1 etapo (${unitsPre.toLocaleString('lt-LT')} vnt.) ir 3 etapo (${unitsPost.toLocaleString('lt-LT')} vnt.) lėšos bei visas jų kapitalo prieaugis (${(valPreToday - valPreDivorce).toLocaleString('lt-LT', {minimumFractionDigits:2})} €) priklauso išimtinai Jums.`;
+    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.89 str. 1 d. 7 p., asmeniniu sutuoktinių turtu pripažįstamas turtas, įgytas iki santuokos ir po faktinio jos nutraukimo. Pasitraukiant iš II pakopos 2026–2027 m. pereinamuoju laikotarpiu, išmokoms taikoma GPM neapmokestinimo lengvata.`;
     document.getElementById('legalText').innerHTML = legalExpl;
 
     const pctPre = (valPreToday / valTotalToday) * 100;
