@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>II Pakopos Pensijų Dalijimo Skaičiuoklė - Petrasmo Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body { background: #fff !important; color: #000 !important; }
+            .no-print { display: none !important; }
+            .print-card { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; color: #000 !important; }
+            .print-text { color: #000 !important; }
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-gray-300 font-sans antialiased min-h-screen pb-16">
+
+    <!-- Header -->
+    <nav class="bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 no-print">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index-lt.html" class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                Petrasmo Studios
+            </a>
+            <a href="index-lt.html" class="text-sm font-medium text-slate-400 hover:text-white transition flex items-center gap-2">
+                ← Grįžti į pradžią
+            </a>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 pt-10">
+        
+        <div class="text-center mb-8">
+            <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
+                LR CK 3.89 str. / Teisinė metodika
+            </span>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mt-3 mb-2">
+                II Pakopos Pensijų Dalijimo Skaičiuoklė
+            </h1>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">
+                Tiksliai atskiria asmeninį turtą iki santuokos ir po skyrybų, įvertina grąžinimą į „Sodrą“ bei aktuarinį pensijos taškų praradimą.
+            </p>
+        </div>
+
+        <!-- Skaičiuoklės forma -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl print-card">
+            
+            <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                1. Pensijų fondo apskaitos vienetai (iš banko pažymos)
+            </h3>
+            
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Santuokos pradžioje (vnt.)</label>
+                    <input type="number" id="u1" value="10000" step="0.0001" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Skyrybų dieną (vnt.)</label>
+                    <input type="number" id="u2" value="24000" step="0.0001" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Šiandien iš viso sukaupta (vnt.)</label>
+                    <input type="number" id="u3" value="27000" step="0.0001" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+            </div>
+
+            <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                2. Vieneto vertės ir grąžinimas į „Sodrą“
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Vieneto kaina skyrybų dieną (€)</label>
+                    <input type="number" id="pDivorce" value="2.0000" step="0.0001" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Vieneto kaina šiandien (€)</label>
+                    <input type="number" id="pToday" value="2.3742" step="0.0001" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">Grįžta į „Sodrą“ suma (€)</label>
+                    <input type="number" id="sodraIncentive" value="10884.49" step="0.01" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-xs font-semibold text-slate-400 mb-2">Pasitraukimo scenarijus</label>
+                <select id="scenario" class="w-full bg-[#0f172a] border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                    <option value="withdraw" selected>Atsiimama grynaisiais / grįžtama į „Sodrą“ (su mokesčių atskaitymu)</option>
+                    <option value="keep">Pinigai lieka fonde (išmoka buvusiam sutuoktiniui iš asmeninių lėšų)</option>
+                </select>
+            </div>
+
+            <button onclick="calculate()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition duration-200 no-print shadow-lg shadow-indigo-600/20">
+                Apskaičiuoti išsamų padalijimą
+            </button>
+
+            <!-- Rezultatų blokas -->
+            <div id="results" class="mt-8 pt-8 border-t border-slate-800 hidden space-y-6">
+                
+                <!-- 3 Pagrindinės kortelės -->
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-red-950/30 border border-red-800/40 rounded-xl p-5 print-card">
+                        <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Buvusiai žmonai (50%)</span>
+                        <div class="text-2xl font-extrabold text-red-300 mt-1" id="cardWife">0.00 €</div>
+                        <p class="text-xs text-red-400/80 mt-1">Santuokinio turto dalis</p>
+                    </div>
+
+                    <div class="bg-purple-950/30 border border-purple-800/40 rounded-xl p-5 print-card">
+                        <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider">Grįžta į „Sodrą“</span>
+                        <div class="text-2xl font-extrabold text-purple-300 mt-1" id="cardSodra">0.00 €</div>
+                        <p class="text-xs text-purple-400/80 mt-1">Už atstatomus pensijos taškus</p>
+                    </div>
+
+                    <div class="bg-emerald-950/30 border border-emerald-800/40 rounded-xl p-5 print-card">
+                        <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">Jums lieka grynaisiais</span>
+                        <div class="text-2xl font-extrabold text-emerald-300 mt-1" id="cardMyTotal">0.00 €</div>
+                        <p class="text-xs text-emerald-400/80 mt-1">Grynieji pinigai į Jūsų sąskaitą</p>
+                    </div>
+                </div>
+
+                <div id="sodraInfoBox" class="bg-indigo-950/40 border border-indigo-800/50 text-indigo-200 text-xs rounded-xl p-4 leading-relaxed print-card print-text"></div>
+
+                <!-- Matematinė eiga -->
+                <div class="bg-[#0b0f19] border border-slate-800 rounded-xl p-5 text-xs space-y-3 print-card print-text">
+                    <div class="font-bold text-white uppercase tracking-wider mb-2">Matematinė skaičiavimų eiga (Žingsnis po žingsnio):</div>
+                    <div>• <strong>1 Žingsnis (Vienetai):</strong> Iki santuokos: <span id="calcStep1Pre"></span> | Santuokoje: <span id="calcStep1Mar"></span> | Po skyrybų: <span id="calcStep1Post"></span></div>
+                    <div>• <strong>2 Žingsnis (Santuokinė vertė skyrybų dieną):</strong> <span id="calcStep2Formula" class="text-indigo-400 font-mono"></span></div>
+                    <div>• <strong>3 Žingsnis (Žmonos 50% kompensacija):</strong> <span id="calcStep3Formula" class="text-red-400 font-mono"></span></div>
+                    <div>• <strong>4 Žingsnis (Jums liekanti suma atskaičius „Sodrą“):</strong> <span id="calcStep4Formula" class="text-emerald-400 font-mono"></span></div>
+                </div>
+
+                <!-- Detali lentelė -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border border-slate-800 rounded-lg overflow-hidden">
+                        <thead class="bg-slate-800/60 text-slate-300">
+                            <tr>
+                                <th class="p-3">Etapas</th>
+                                <th class="p-3">Vienetai</th>
+                                <th class="p-3">Vertė skyrybų dieną</th>
+                                <th class="p-3">Vertė šiandien</th>
+                                <th class="p-3">Teisinis statusas</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-400">
+                            <tr>
+                                <td class="p-3 font-semibold text-white">1 Etapas (Iki santuokos)</td>
+                                <td class="p-3" id="tUnitsPre">0</td>
+                                <td class="p-3" id="tValPreDivorce">0.00 €</td>
+                                <td class="p-3 text-emerald-400 font-semibold" id="tValPreToday">0.00 €</td>
+                                <td class="p-3 text-emerald-400">100% Asmeninė nuosavybė</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-white">2 Etapas (Santuokos metu)</td>
+                                <td class="p-3" id="tUnitsMar">0</td>
+                                <td class="p-3 text-indigo-400 font-semibold" id="tValMarDivorce">0.00 €</td>
+                                <td class="p-3 text-indigo-400 font-semibold" id="tValMarToday">0.00 €</td>
+                                <td class="p-3 text-indigo-400">Bendroji jungtinė (50/50)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-white">3 Etapas (Po skyrybų)</td>
+                                <td class="p-3" id="tUnitsPost">0</td>
+                                <td class="p-3">0.00 €</td>
+                                <td class="p-3 text-emerald-400 font-semibold" id="tValPostToday">0.00 €</td>
+                                <td class="p-3 text-emerald-400">100% Asmeninė nuosavybė</td>
+                            </tr>
+                            <tr class="bg-slate-800/40 font-bold text-white">
+                                <td class="p-3">IŠ VISO FONDE:</td>
+                                <td class="p-3" id="tUnitsTotal">0</td>
+                                <td class="p-3" id="tValTotalDivorce">0.00 €</td>
+                                <td class="p-3 text-indigo-300" id="tValTotalToday">0.00 €</td>
+                                <td class="p-3">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-amber-950/30 border border-amber-800/40 text-amber-300 text-xs rounded-xl p-4 leading-relaxed print-card print-text" id="legalText"></div>
+
+                <div class="flex justify-end no-print">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-medium py-2.5 px-5 rounded-lg text-xs transition flex items-center gap-2 border border-slate-700">
+                        🖨️ Spausdinti / Išsaugoti PDF
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    function calculate() {
+        const u1 = parseFloat(document.getElementById('u1').value) || 0;
+        const u2 = parseFloat(document.getElementById('u2').value) || 0;
+        const u3 = parseFloat(document.getElementById('u3').value) || 0;
+        const pDivorce = parseFloat(document.getElementById('pDivorce').value) || 0;
+        const pToday = parseFloat(document.getElementById('pToday').value) || 0;
+        const sodraIncentive = parseFloat(document.getElementById('sodraIncentive').value) || 0;
+        const scenario = document.getElementById('scenario').value;
+
+        if (u2 < u1 || u3 < u2) {
+            alert("Klaida: vienetų skaičius bėgant laikui negali mažėti!");
+            return;
+        }
+
+        const unitsPre = u1;
+        const unitsMarital = u2 - u1;
+        const unitsPost = u3 - u2;
+        const unitsTotal = u3;
+
+        const valPreDivorce = unitsPre * pDivorce;
+        const valMaritalDivorce = unitsMarital * pDivorce;
+        const valTotalDivorce = u2 * pDivorce;
+
+        const valPreToday = unitsPre * pToday;
+        const valMaritalToday = unitsMarital * pToday;
+        const valPostToday = unitsPost * pToday;
+        const valTotalToday = unitsTotal * pToday;
+
+        let wifeShare = valMaritalDivorce / 2;
+        let myRemaining = 0;
+        let sodraReturned = 0;
+
+        document.getElementById('calcStep1Pre').innerText = unitsPre.toLocaleString('lt-LT') + ' vnt.';
+        document.getElementById('calcStep1Mar').innerText = `${u2.toLocaleString('lt-LT')} - ${u1.toLocaleString('lt-LT')} = ${unitsMarital.toLocaleString('lt-LT')} vnt.`;
+        document.getElementById('calcStep1Post').innerText = `${u3.toLocaleString('lt-LT')} - ${u2.toLocaleString('lt-LT')} = ${unitsPost.toLocaleString('lt-LT')} vnt.`;
+
+        document.getElementById('calcStep2Formula').innerText = `${unitsMarital.toLocaleString('lt-LT')} vnt. × ${pDivorce.toFixed(4)} € = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+
+        let sodraHtml = "";
+        if (scenario === 'withdraw') {
+            sodraReturned = sodraIncentive;
+            const gpmRate = 0.15;
+            const wifeShareGross = wifeShare;
+            wifeShare = wifeShare * (1 - gpmRate);
+            myRemaining = valTotalToday - sodraReturned - wifeShareGross;
+
+            document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShareGross.toLocaleString('lt-LT', {minimumFractionDigits:2})} € → Atėmus 15% GPM: ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+            document.getElementById('calcStep4Formula').innerText = `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) - ${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grįžta į „Sodrą“) - ${wifeShareGross.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonos dalis) = ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+
+            sodraHtml = `<strong>Pasitraukimo į „Sodrą“ suvestinė:</strong><br>
+            • Į „Sodros“ biudžetą grąžinama suma: <strong>${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong> (už tai atstatomi Jūsų I pakopos pensijos taškai).<br>
+            • Buvusiai žmonai išmokama kompensacija: <strong>${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.<br>
+            • <strong>Jums į asmeninę sąskaitą lieka grynaisiais: ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.`;
+            document.getElementById('cardSodra').innerText = sodraReturned.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+        } else {
+            sodraReturned = 0;
+            myRemaining = valTotalToday - wifeShare;
+
+            document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+            document.getElementById('calcStep4Formula').innerText = `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) - ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonos dalis) = ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+
+            sodraHtml = `<strong>Informacija:</strong> Pasirinktas scenarijus, kai pinigai lieka fonde. „Sodrai“ niekas negrąžinama, o žmonai kompensuojama iš asmeninių lėšų.`;
+            document.getElementById('cardSodra').innerText = "0.00 €";
+        }
+
+        document.getElementById('sodraInfoBox').innerHTML = sodraHtml;
+
+        document.getElementById('cardWife').innerText = wifeShare.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+        document.getElementById('cardMyTotal').innerText = myRemaining.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+
+        document.getElementById('tUnitsPre').innerText = unitsPre.toLocaleString('lt-LT');
+        document.getElementById('tValPreDivorce').innerText = valPreDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+        document.getElementById('tValPreToday').innerText = valPreToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+
+        document.getElementById('tUnitsMar').innerText = unitsMarital.toLocaleString('lt-LT');
+        document.getElementById('tValMarDivorce').innerText = valMaritalDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+        document.getElementById('tValMarToday').innerText = valMaritalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+
+        document.getElementById('tUnitsPost').innerText = unitsPost.toLocaleString('lt-LT');
+        document.getElementById('tValPostToday').innerText = valPostToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+
+        document.getElementById('tUnitsTotal').innerText = unitsTotal.toLocaleString('lt-LT');
+        document.getElementById('tValTotalDivorce').innerText = valTotalDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+        document.getElementById('tValTotalToday').innerText = valTotalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+
+        let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.89 str. 1 d. 7 p., asmeniniu sutuoktinių turtu pripažįstamas turtas, įgytas iki santuokos ir po faktinio jos nutraukimo. Todėl 1 etapo (${unitsPre.toLocaleString('lt-LT')} vnt.) ir 3 etapo (${unitsPost.toLocaleString('lt-LT')} vnt.) lėšos bei visas jų kapitalo prieaugis (${(valPreToday - valPreDivorce).toLocaleString('lt-LT', {minimumFractionDigits:2})} €) priklauso išimtinai Jums.`;
+        document.getElementById('legalText').innerHTML = legalExpl;
+
+        document.getElementById('results').classList.remove('hidden');
+    }
+    </script>
+</body>
+</html>
