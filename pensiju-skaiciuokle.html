@@ -146,7 +146,7 @@
         .bar-segment { height: 100%; transition: width 0.5s ease; }
         .bar-pre { background: #10b981; }
         .bar-mar-my { background: #3b82f6; }
-        .bar-mar-wife { background: #ef4444; }
+        .bar-mar-spouse { background: #ef4444; }
         .bar-post { background: #8b5cf6; }
 
         .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; margin-bottom: 24px; }
@@ -292,8 +292,8 @@
         
         <div class="main-cards">
             <div class="card-stat highlight-red">
-                <div class="title">Buvusiai žmonai (50%)</div>
-                <div class="amount" id="cardWife">0.00 €</div>
+                <div class="title">Buvusiam sutuoktiniui (-ei) (50%)</div>
+                <div class="amount" id="cardSpouse">0.00 €</div>
                 <div class="subtitle">Kompensacija (GPM 0%)</div>
             </div>
             <div class="card-stat highlight-purple">
@@ -315,14 +315,14 @@
         <div class="bar-container">
             <div class="bar-segment bar-pre" id="barPre" title="Iki santuokos"></div>
             <div class="bar-segment bar-mar-my" id="barMarMy" title="Jūsų santuokinė pusė"></div>
-            <div class="bar-segment bar-mar-wife" id="barMarWife" title="Žmonos dalis"></div>
+            <div class="bar-segment bar-mar-spouse" id="barMarSpouse" title="Sutuoktinio (-ės) dalis"></div>
             <div class="bar-segment bar-post" id="barPost" title="Po skyrybų"></div>
         </div>
 
         <div class="legend">
             <div class="legend-item"><div class="dot" style="background:#10b981;"></div> Iki santuokos (Jūsų)</div>
             <div class="legend-item"><div class="dot" style="background:#3b82f6;"></div> Santuokinė (Jūsų 50%)</div>
-            <div class="legend-item"><div class="dot" style="background:#ef4444;"></div> Žmonos dalis (50%)</div>
+            <div class="legend-item"><div class="dot" style="background:#ef4444;"></div> Sutuoktinio (-ės) dalis (50%)</div>
             <div class="legend-item"><div class="dot" style="background:#8b5cf6;"></div> Po skyrybų (Jūsų)</div>
         </div>
 
@@ -342,7 +342,7 @@
         </div>
 
         <div class="step-box">
-            <div class="step-title">3 ŽINGSNIS: Žmonai tenkanti kompensacija (50/50 dalijimas)</div>
+            <div class="step-title">3 ŽINGSNIS: Buvusiam sutuoktiniui (-ei) tenkanti kompensacija (50/50 dalijimas)</div>
             <div class="formula" id="calcStep3Formula"></div>
         </div>
 
@@ -512,51 +512,51 @@ function calculate() {
 
         step1Html = `• <strong>1 Etapas (Iki santuokos):</strong> ${preMonths} mėn. (${(preRatio*100).toFixed(2)}% iki skyrybų buvusio laiko).<br>
                      • <strong>2 Etapas (Santuokoje):</strong> ${maritalMonths} mėn. (${(maritalRatio*100).toFixed(2)}% iki skyrybų buvusio laiko).<br>
-                     • <strong>3 Etapas (Po skyrybų gyvenote vienas):</strong> ${postMonths} mėn. (visas šis laikas ir prieaugis lieka Jums).`;
+                     • <strong>3 Etapas (Po skyrybų vienas):</strong> ${postMonths} mėn. (visas šis laikas ir prieaugis lieka Jums).`;
         
         step2Formula = `${valTotalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € × ${(maritalRatio*100).toFixed(2)}% = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
     }
 
-    let wifeShare = valMaritalDivorce / 2;
+    let spouseShare = valMaritalDivorce / 2;
     let myRemaining = 0;
     let sodraReturned = 0;
 
     document.getElementById('calcStep1Text').innerHTML = step1Html;
     document.getElementById('calcStep2Formula').innerText = step2Formula;
-    document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+    document.getElementById('calcStep3Formula').innerText = `${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € / 2 = ${spouseShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
     let sodraHtml = "";
     if (scenario === 'withdraw') {
         sodraReturned = sodraIncentive;
-        myRemaining = valTotalToday - sodraReturned - wifeShare;
+        myRemaining = valTotalToday - sodraReturned - spouseShare;
 
         document.getElementById('calcStep4Formula').innerText = 
             `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) ` +
             `- ${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grįžta į „Sodrą“) ` +
-            `- ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) ` +
+            `- ${spouseShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (sutuoktiniui (-ei)) ` +
             `= ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (Jums lieka grynaisiais į sąskaitą)`;
 
         sodraHtml = `<strong>Pasitraukimo į „Sodrą“ ir išgryninimo suvestinė (GPM 0% lengvata 2026–2027 m.):</strong><br>
         • Į „Sodros“ biudžetą grąžinama suma: <strong>${sodraReturned.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong> (už tai atstatomi Jūsų I pakopos pensijos taškai).<br>
-        • Buvusiai žmonai išmokama kompensacija: <strong>${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.<br>
+        • Buvusiam sutuoktiniui (-ei) išmokama kompensacija: <strong>${spouseShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.<br>
         • <strong>Jums į asmeninę sąskaitą lieka grynaisiais: ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong> (lėšos GPM neapmokestinamos).`;
         document.getElementById('cardSodra').innerText = sodraReturned.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     } else {
         sodraReturned = 0;
-        myRemaining = valTotalToday - wifeShare;
+        myRemaining = valTotalToday - spouseShare;
 
         document.getElementById('calcStep4Formula').innerText = 
             `${valTotalToday.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai šiandien) ` +
-            `- ${wifeShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (žmonai) ` +
+            `- ${spouseShare.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (sutuoktiniui (-ei)) ` +
             `= ${myRemaining.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
-        sodraHtml = `<strong>Informacija:</strong> Pasirinktas scenarijus, kai pinigai lieka fonde. „Sodrai“ niekas negrąžinama, o žmonai kompensuojama iš asmeninių lėšų.`;
+        sodraHtml = `<strong>Informacija:</strong> Pasirinktas scenarijus, kai pinigai lieka fonde. „Sodrai“ niekas negrąžinama, o buvusiam sutuoktiniui (-ei) kompensuojama iš asmeninių lėšų.`;
         document.getElementById('cardSodra').innerText = "0.00 €";
     }
 
     document.getElementById('sodraInfoBox').innerHTML = sodraHtml;
 
-    document.getElementById('cardWife').innerText = wifeShare.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
+    document.getElementById('cardSpouse').innerText = spouseShare.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('cardMyTotal').innerText = myRemaining.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('totalBarSum').innerText = 'Bendra vertė: ' + valTotalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
@@ -579,13 +579,13 @@ function calculate() {
     document.getElementById('legalText').innerHTML = legalExpl;
 
     const pctPre = (valPreToday / valTotalToday) * 100;
-    const pctMarWife = (wifeShare / valTotalToday) * 100;
+    const pctMarSpouse = (spouseShare / valTotalToday) * 100;
     const pctMarMy = ((valMaritalDivorce/2) / valTotalToday) * 100;
     const pctPost = (valPostToday / valTotalToday) * 100;
 
     document.getElementById('barPre').style.width = pctPre + '%';
     document.getElementById('barMarMy').style.width = pctMarMy + '%';
-    document.getElementById('barMarWife').style.width = pctMarWife + '%';
+    document.getElementById('barMarSpouse').style.width = pctMarSpouse + '%';
     document.getElementById('barPost').style.width = pctPost + '%';
 
     document.getElementById('results').style.display = 'block';
