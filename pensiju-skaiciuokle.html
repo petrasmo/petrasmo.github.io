@@ -195,16 +195,39 @@
 
     <!-- Metodo perjungiklis -->
     <div class="method-tabs no-print">
-        <button class="tab-btn active" id="tabTime" onclick="setMethod('time')">
-            ⏳ 1. Išgyvento laiko proporcijos metodas (Rekomenduojamas)
+        <button class="tab-btn active" id="tabGrowth" onclick="setMethod('growth')">
+            📈 1. Investicinio prieaugio metodas (Pats tiksliausias)
         </button>
-        <button class="tab-btn" id="tabUnits" onclick="setMethod('units')">
-            🎯 2. Apskaitos vienetų metodas
+        <button class="tab-btn" id="tabTime" onclick="setMethod('time')">
+            ⏳ 2. Išgyvento laiko proporcijos metodas
         </button>
     </div>
 
-    <!-- 1 METODAS: LAIKO IR VERČIŲ PROPORCIJOS ĮVESTIS (PAGRINDINIS) -->
-    <div id="methodTimeBlock">
+    <!-- 1 METODAS: INVESTICINIO PRIEAUGIO METODAS (PAGRINDINIS) -->
+    <div id="methodGrowthBlock">
+        <div class="section-label">1. Pradinis kapitalas ir 10 m. fondo prieaugis</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Vertė 2014-12-09 (34 622,36 Lt = 10 027,33 €)</label>
+                <input type="number" id="valStartGrowth" value="10027.33" step="0.01" style="background:#f1f5f9;">
+            </div>
+            <div class="input-group">
+                <label>Fondo investicinis prieaugis per 10 m. (%)</label>
+                <input type="number" id="growthPct" value="130" step="1">
+            </div>
+            <div class="input-group">
+                <label>Fondo vertė skyrybų dieną 2024-11-08 (€)</label>
+                <input type="number" id="valDivorceGrowth" value="52279.86" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Fondo vertė šiandien (€)</label>
+                <input type="number" id="valTodayGrowth" value="64104.18" step="0.01">
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 METODAS: LAIKO PROPORCIJOS ĮVESTIS -->
+    <div id="methodTimeBlock" style="display: none;">
         <div class="section-label">1. Datos (Formatas: YYYY-MM-DD)</div>
         <div class="grid">
             <div class="input-group">
@@ -225,50 +248,15 @@
             </div>
         </div>
 
-        <div class="section-label">2. Fondo vertės (€) iš „Swedbank“ pažymos</div>
+        <div class="section-label">2. Fondo vertės (€)</div>
         <div class="grid">
             <div class="input-group">
-                <label>Fondo vertė 2014-12-09 (34 622,36 Lt = 10 027,33 €)</label>
-                <input type="number" id="valStart2014" value="10027.33" step="0.01" readonly style="background:#f1f5f9;">
-            </div>
-            <div class="input-group">
-                <label>Fondo vertė skyrybų dieną 2024-11-08 (€)</label>
+                <label>Fondo vertė skyrybų dieną (€)</label>
                 <input type="number" id="valDivorceTime" value="52279.86" step="0.01">
             </div>
             <div class="input-group">
                 <label>Fondo vertė šiandien (€)</label>
                 <input type="number" id="valTodayTime" value="64104.18" step="0.01">
-            </div>
-        </div>
-    </div>
-
-    <!-- 2 METODAS: VIENETŲ ĮVESTIS -->
-    <div id="methodUnitsBlock" style="display: none;">
-        <div class="section-label">1. Pensijų fondo apskaitos vienetai (iš banko pažymos)</div>
-        <div class="grid">
-            <div class="input-group">
-                <label>1. Santuokos pradžioje (2014-12-09)</label>
-                <input type="number" id="u1" value="5280.60" placeholder="Pvz., 5280.60" step="0.0001">
-            </div>
-            <div class="input-group">
-                <label>2. Skyrybų dieną (2024-11-08)</label>
-                <input type="number" id="u2" value="27531.657" placeholder="Pvz., 27531.657" step="0.0001">
-            </div>
-            <div class="input-group">
-                <label>3. Šiandien sukaupta iš viso</label>
-                <input type="number" id="u3" value="28500.00" placeholder="Pvz., 28500" step="0.0001">
-            </div>
-        </div>
-
-        <div class="section-label">2. Vieneto vertės (€)</div>
-        <div class="grid">
-            <div class="input-group">
-                <label>Vieneto kaina skyrybų dieną (€)</label>
-                <input type="number" id="pDivorce" value="1.8989" placeholder="Pvz., 1.8989" step="0.0001">
-            </div>
-            <div class="input-group">
-                <label>Vieneto kaina šiandien (€)</label>
-                <input type="number" id="pToday" value="2.2493" placeholder="Pvz., 2.2493" step="0.0001">
             </div>
         </div>
     </div>
@@ -336,12 +324,12 @@
         <div class="section-label">Matematinė skaičiavimų eiga (Žingsnis po žingsnio)</div>
         
         <div class="step-box">
-            <div class="step-title">1 ŽINGSNIS: Laikotarpio / vienetų paskirstymas pagal 3 etapus</div>
+            <div class="step-title">1 ŽINGSNIS: Jūsų asmeninio pradinio kapitalo ir jo 10 m. prieaugio apskaičiavimas</div>
             <div id="calcStep1Text"></div>
         </div>
 
         <div class="step-box">
-            <div class="step-title">2 ŽINGSNIS: Santuokinio turto vertė skyrybų dieną</div>
+            <div class="step-title">2 ŽINGSNIS: Tikroji bendra santuokinė dalis skyrybų dieną</div>
             <div class="formula" id="calcStep2Formula"></div>
         </div>
 
@@ -362,7 +350,7 @@
                     <tr>
                         <th>Etapas</th>
                         <th>Laikotarpis</th>
-                        <th>Kiekis / Trukmė</th>
+                        <th>Kiekis / Būsena</th>
                         <th>Vertė skyrybų dieną</th>
                         <th>Vertė šiandien</th>
                         <th>Teisinis statusas</th>
@@ -371,24 +359,24 @@
                 <tbody>
                     <tr>
                         <td><strong>1 Etapas</strong></td>
-                        <td>Iki santuokos</td>
-                        <td id="tUnitsPre">-</td>
+                        <td>Iki santuokos (2014-12-09)</td>
+                        <td id="tUnitsPre">10 027,33 € + 130% pelnas</td>
                         <td id="tValPreDivorce">0.00 €</td>
                         <td id="tValPreToday" style="font-weight:600; color:#15803d;">0.00 €</td>
                         <td>100% Asmeninė nuosavybė</td>
                     </tr>
                     <tr>
                         <td><strong>2 Etapas</strong></td>
-                        <td>Santuokos metu</td>
-                        <td id="tUnitsMar">-</td>
+                        <td>Santuokos metu (2014–2024 m.)</td>
+                        <td id="tUnitsMar">Santuokinės įmokos + pelnas</td>
                         <td id="tValMarDivorce" style="font-weight:600; color:#2563eb;">0.00 €</td>
                         <td id="tValMarToday" style="font-weight:600; color:#2563eb;">0.00 €</td>
                         <td>Bendroji jungtinė (50/50)</td>
                     </tr>
                     <tr>
                         <td><strong>3 Etapas</strong></td>
-                        <td>Po skyrybų</td>
-                        <td id="tUnitsPost">-</td>
+                        <td>Po skyrybų (nuo 2024-11-08)</td>
+                        <td id="tUnitsPost">2 m. prieaugis vienam</td>
                         <td>0.00 €</td>
                         <td id="tValPostToday" style="font-weight:600; color:#15803d;">0.00 €</td>
                         <td>100% Asmeninė nuosavybė</td>
@@ -413,13 +401,13 @@
 </div>
 
 <script>
-let currentMethod = 'time';
+let currentMethod = 'growth';
 
 function setMethod(method) {
     currentMethod = method;
-    document.getElementById('tabUnits').classList.toggle('active', method === 'units');
+    document.getElementById('tabGrowth').classList.toggle('active', method === 'growth');
     document.getElementById('tabTime').classList.toggle('active', method === 'time');
-    document.getElementById('methodUnitsBlock').style.display = method === 'units' ? 'block' : 'none';
+    document.getElementById('methodGrowthBlock').style.display = method === 'growth' ? 'block' : 'none';
     document.getElementById('methodTimeBlock').style.display = method === 'time' ? 'block' : 'none';
     calculate();
 }
@@ -443,39 +431,38 @@ function calculate() {
     let unitsPreText = "", unitsMarText = "", unitsPostText = "", unitsTotalText = "";
     let step1Html = "", step2Formula = "";
 
-    if (currentMethod === 'units') {
-        const u1 = parseFloat(document.getElementById('u1').value) || 0;
-        const u2 = parseFloat(document.getElementById('u2').value) || 0;
-        const u3 = parseFloat(document.getElementById('u3').value) || 0;
-        const pDivorce = parseFloat(document.getElementById('pDivorce').value) || 0;
-        const pToday = parseFloat(document.getElementById('pToday').value) || 0;
+    if (currentMethod === 'growth') {
+        const vStart = parseFloat(document.getElementById('valStartGrowth').value) || 0; // 10027.33 €
+        const gPct = parseFloat(document.getElementById('growthPct').value) || 0; // 130 %
+        valTotalDivorce = parseFloat(document.getElementById('valDivorceGrowth').value) || 0; // 52279.86 €
+        valTotalToday = parseFloat(document.getElementById('valTodayGrowth').value) || 0; // 64104.18 €
 
-        const unitsPre = u1;
-        const unitsMarital = u2 - u1;
-        const unitsPost = u3 - u2;
-        const unitsTotal = u3;
+        // 1. Pelnas nuo pradinio kapitalo
+        const personalProfit = vStart * (gPct / 100); // 10027.33 * 1.30 = 13035.53 €
+        valPreDivorce = vStart + personalProfit; // 23062.86 € (Jūsų asmeninis krepšelis skyrybų dieną)
 
-        valTotalDivorce = u2 * pDivorce;
-        valTotalToday = unitsTotal * pToday;
-        valPreDivorce = unitsPre * pDivorce;
-        valMaritalDivorce = unitsMarital * pDivorce;
-        valPreToday = unitsPre * pToday;
-        valMaritalToday = unitsMarital * pToday;
-        valPostToday = unitsPost * pToday;
+        // 2. Santuokinė dalis
+        valMaritalDivorce = valTotalDivorce - valPreDivorce; // 52279.86 - 23062.86 = 29217.00 €
 
-        unitsPreText = unitsPre.toLocaleString('lt-LT') + ' vnt.';
-        unitsMarText = unitsMarital.toLocaleString('lt-LT') + ' vnt.';
-        unitsPostText = unitsPost.toLocaleString('lt-LT') + ' vnt.';
-        unitsTotalText = unitsTotal.toLocaleString('lt-LT') + ' vnt.';
+        // 3. Po skyrybų prieaugis
+        const growthAfterDivorce = valTotalToday - valTotalDivorce;
+        valPreToday = valPreDivorce;
+        valMaritalToday = valMaritalDivorce;
+        valPostToday = growthAfterDivorce > 0 ? growthAfterDivorce : 0;
 
-        step1Html = `• <strong>1 Etapas (Iki santuokos):</strong> ${unitsPre.toLocaleString('lt-LT')} vnt.<br>
-                     • <strong>2 Etapas (Santuokoje nupirkta):</strong> ${u2.toLocaleString('lt-LT')} - ${u1.toLocaleString('lt-LT')} = ${unitsMarital.toLocaleString('lt-LT')} vnt.<br>
-                     • <strong>3 Etapas (Po skyrybų nupirkta):</strong> ${u3.toLocaleString('lt-LT')} - ${u2.toLocaleString('lt-LT')} = ${unitsPost.toLocaleString('lt-LT')} vnt.`;
-        
-        step2Formula = `${unitsMarital.toLocaleString('lt-LT')} vnt. × ${pDivorce.toFixed(4)} € = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+        unitsPreText = `${vStart.toLocaleString('lt-LT', {minimumFractionDigits:2})} € + ${gPct}% pelnas`;
+        unitsMarText = `Naujos įmokos + pelnas`;
+        unitsPostText = `Prieaugis po skyrybų`;
+        unitsTotalText = `100% fondo turto`;
+
+        step1Html = `• <strong>Jūsų pradinis kapitalas (2014-12-09):</strong> ${vStart.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (34 622,36 Lt).<br>
+                     • <strong>Fondo investicinis prieaugis per 10 m. (${gPct}%):</strong> ${vStart.toLocaleString('lt-LT', {minimumFractionDigits:2})} € × ${gPct}% = <strong>+${personalProfit.toLocaleString('lt-LT', {minimumFractionDigits:2})} € pelno</strong>.<br>
+                     • <strong>Jūsų asmeninio krepšelio vertė skyrybų dieną:</strong> ${vStart.toLocaleString('lt-LT', {minimumFractionDigits:2})} € + ${personalProfit.toLocaleString('lt-LT', {minimumFractionDigits:2})} € = <strong>${valPreDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (100% Jūsų asmeninė nuosavybė)</strong>.`;
+
+        step2Formula = `${valTotalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (bendrai 2024 m.) - ${valPreDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (Jūsų asmeninis krepšelis) = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
     } else {
-        // Laiko ir verčių proporcijos metodas (JŪSŲ TIKRI DUOMENYS)
+        // Laiko proporcijos metodas
         const dStart = new Date(document.getElementById('tStartDate').value);
         const dMarriage = new Date(document.getElementById('tMarriageDate').value);
         const dDivorce = new Date(document.getElementById('tDivorceDate').value);
@@ -484,14 +471,14 @@ function calculate() {
         valTotalDivorce = parseFloat(document.getElementById('valDivorceTime').value) || 0;
         valTotalToday = parseFloat(document.getElementById('valTodayTime').value) || 0;
 
-        const preMonths = parseMonths(dStart, dMarriage); // 126 mėn.
-        const maritalMonths = parseMonths(dMarriage, dDivorce); // 119 mėn.
-        const postMonths = parseMonths(dDivorce, dToday); // ~23 mėn.
-        const totalUpToDivorceMonths = preMonths + maritalMonths; // 245 mėn.
+        const preMonths = parseMonths(dStart, dMarriage);
+        const maritalMonths = parseMonths(dMarriage, dDivorce);
+        const postMonths = parseMonths(dDivorce, dToday);
+        const totalUpToDivorceMonths = preMonths + maritalMonths;
         const totalAllMonths = preMonths + maritalMonths + postMonths;
 
-        const maritalRatio = maritalMonths / totalUpToDivorceMonths; // ~48.57%
-        const preRatio = preMonths / totalUpToDivorceMonths; // ~51.43%
+        const maritalRatio = maritalMonths / totalUpToDivorceMonths;
+        const preRatio = preMonths / totalUpToDivorceMonths;
 
         valMaritalDivorce = valTotalDivorce * maritalRatio;
         valPreDivorce = valTotalDivorce * preRatio;
@@ -571,7 +558,7 @@ function calculate() {
     document.getElementById('tValTotalDivorce').innerText = valTotalDivorce.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('tValTotalToday').innerText = valTotalToday.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.89 str. 1 d. 7 p., asmeniniu sutuoktinių turtu pripažįstamas turtas, įgytas iki santuokos (2014 m. vertė 34 622,36 Lt / 10 027,33 €) ir po faktinio jos nutraukimo. Pasitraukiant iš II pakopos 2026–2027 m. pereinamuoju laikotarpiu, išmokoms taikoma GPM neapmokestinimo lengvata.`;
+    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.89 str. 1 d. 7 p., asmeniniu sutuoktinių turtu pripažįstamas turtas, įgytas iki santuokos (10 027,33 € / 34 622,36 Lt) ir šio turto investicinis prieaugis per 10 metų (+130% pelnas = +13 035,53 €). Bendrai Jūsų asmeninis turtas skyrybų dieną sudaro 23 062,86 €. Pasitraukiant iš II pakopos 2026–2027 m. pereinamuoju laikotarpiu, išmokoms taikoma GPM neapmokestinimo lengvata.`;
     document.getElementById('legalText').innerHTML = legalExpl;
 
     const pctPre = (valPreToday / valTotalToday) * 100;
@@ -587,7 +574,6 @@ function calculate() {
     document.getElementById('results').style.display = 'block';
 }
 
-// Automatiškai apskaičiuoja atidarius puslapį
 window.onload = function() {
     calculate();
 };
