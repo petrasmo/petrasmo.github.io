@@ -205,14 +205,15 @@
 
     <!-- 1 METODAS: INVESTICINIO PRIEAUGIO METODAS -->
     <div id="methodGrowthBlock">
-        <div class="section-label">1. Pradinis kapitalas ir 10 m. fondo prieaugis</div>
+        <div class="section-label">1. Pradinis kapitalas ir fondo prieaugis</div>
         <div class="grid">
             <div class="input-group">
                 <label>Vertė 2014-12-09 (34 622,36 Lt = 10 027,33 €)</label>
                 <input type="number" id="valStartGrowth" value="10027.33" step="0.01" style="background:#f1f5f9;">
             </div>
             <div class="input-group">
-                <label>Fondo investicinis prieaugis per 10 m. (%)</label>
+                <!-- PAKEISTAS TEKSTAS ČIA -->
+                <label>Fondo investicinis prieaugis per santuokos laikotarpį (%)</label>
                 <input type="number" id="growthPct" value="130" step="1">
             </div>
             <div class="input-group">
@@ -433,22 +434,18 @@ function calculate() {
     let step1Html = "", step2Formula = "";
 
     if (currentMethod === 'growth') {
-        const vStart = parseFloat(document.getElementById('valStartGrowth').value) || 0; // 10027.33 €
-        const gPct = parseFloat(document.getElementById('growthPct').value) || 0; // 130 %
-        valTotalDivorceGross = parseFloat(document.getElementById('valDivorceGrowth').value) || 0; // 52279.86 €
-        valTotalToday = parseFloat(document.getElementById('valTodayGrowth').value) || 0; // 64104.18 €
+        const vStart = parseFloat(document.getElementById('valStartGrowth').value) || 0;
+        const gPct = parseFloat(document.getElementById('growthPct').value) || 0;
+        valTotalDivorceGross = parseFloat(document.getElementById('valDivorceGrowth').value) || 0;
+        valTotalToday = parseFloat(document.getElementById('valTodayGrowth').value) || 0;
 
-        // 1 ŽINGSNIS: „Sodros“ atėmimas iš bendro fondo
-        netDivorcePool = valTotalDivorceGross - sodraIncentive; // 52279.86 - 10884.49 = 41395.37 €
+        netDivorcePool = valTotalDivorceGross - sodraIncentive;
 
-        // 2 ŽINGSNIS: Jūsų asmeninio krepšelio pelnas ir vertė
-        const personalProfit = vStart * (gPct / 100); // 13035.53 €
-        valPreDivorce = vStart + personalProfit; // 23062.86 €
+        const personalProfit = vStart * (gPct / 100);
+        valPreDivorce = vStart + personalProfit;
 
-        // 3 ŽINGSNIS: Tikrasis santuokinis likutis
-        valMaritalDivorce = netDivorcePool - valPreDivorce; // 41395.37 - 23062.86 = 18332.51 €
+        valMaritalDivorce = netDivorcePool - valPreDivorce;
 
-        // Po skyrybų prieaugis
         const growthAfterDivorce = valTotalToday - valTotalDivorceGross;
         valPreToday = valPreDivorce;
         valMaritalToday = valMaritalDivorce;
@@ -463,10 +460,9 @@ function calculate() {
                      • <strong>Minus „Sodros“ dalis (privalomas įsipareigojimas):</strong> -${sodraIncentive.toLocaleString('lt-LT', {minimumFractionDigits:2})} €.<br>
                      • <strong>TIKROJI GRYNOJI FONDO VERTĖ DALIJIMUI:</strong> ${valTotalDivorceGross.toLocaleString('lt-LT', {minimumFractionDigits:2})} € - ${sodraIncentive.toLocaleString('lt-LT', {minimumFractionDigits:2})} € = <strong>${netDivorcePool.toLocaleString('lt-LT', {minimumFractionDigits:2})} €</strong>.`;
 
-        step2Formula = `${netDivorcePool.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grynoji vertė) - ${valPreDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (Jūsų asmeninis krepšelis: 10 027,33 € + 130% pelnas) = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
+        step2Formula = `${netDivorcePool.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (grynoji vertė) - ${valPreDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} € (Jūsų asmeninis krepšelis: 10 027,33 € + ${gPct}% pelnas per santuoką) = ${valMaritalDivorce.toLocaleString('lt-LT', {minimumFractionDigits:2})} €`;
 
     } else {
-        // Laiko metodas
         const dStart = new Date(document.getElementById('tStartDate').value);
         const dMarriage = new Date(document.getElementById('tMarriageDate').value);
         const dDivorce = new Date(document.getElementById('tDivorceDate').value);
@@ -546,7 +542,7 @@ function calculate() {
     document.getElementById('tValTotalDivorce').innerText = netDivorcePool.toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
     document.getElementById('tValTotalToday').innerText = (valTotalToday - sodraIncentive).toLocaleString('lt-LT', { minimumFractionDigits: 2 }) + ' €';
 
-    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.88 ir 3.109 str., dalijamas tik grynasis bendras turtas, atskaičius privalomus įsipareigojimus valstybei („Sodrai“). Taip pat pagal CK 3.89 str. 1 d. 7 p., Jūsų pradinis kapitalas (10 027,33 €) ir jo 130% investicinis prieaugis (+13 035,53 €) yra Jūsų asmeninė nuosavybė.`;
+    let legalExpl = `<strong>Teisinis pagrindas:</strong> Pagal LR CK 3.88 ir 3.109 str., dalijamas tik grynasis bendras turtas, atskaičius privalomus įsipareigojimus valstybei („Sodrai“). Taip pat pagal CK 3.89 str. 1 d. 7 p., Jūsų pradinis kapitalas (10 027,33 €) ir jo ${gPct}% investicinis prieaugis per santuokos laikotarpį yra Jūsų asmeninė nuosavybė.`;
     document.getElementById('legalText').innerHTML = legalExpl;
 
     const netTotalToday = valTotalToday - sodraIncentive;
